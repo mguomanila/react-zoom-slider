@@ -12,7 +12,7 @@ let lensCurrent = null
 let imageCurrent = null
 let resultCurrent = null
 
-const SilderImage = ({
+const SliderImage = ({
   data, width, showDescription, direction,
 }) => {
   const [index, setIndex] = useState(0)
@@ -82,15 +82,15 @@ const SilderImage = ({
       imageCurrent.removeEventListener('mousemove', moveLens)
       lensCurrent.removeEventListener('mousemove', moveLens)
     }
-  }, [])
+  }, [data])
 
   const onPrevSlider = useCallback(() => {
     setIndex(prev => (prev - 1 + data.length) % data.length)
-  }, [])
+  }, [data])
 
   const onNextSlider = useCallback(() => {
     setIndex(prev => (prev + 1) % data.length)
-  }, [])
+  }, [data])
 
   return (
     <div className="react-slider" style={{ width: width || 'auto' }}>
@@ -98,7 +98,7 @@ const SilderImage = ({
         <div className="react-slider__areaZoom">
           <div className="react-slider__lens" ref={refLens} />
           <div className="react-slider__picture">
-            <img src={selectedImage.image} alt={selectedImage.image} ref={refImage} />
+            <img src={selectedImage.image} alt={selectedImage.text} ref={refImage} />
           </div>
           <div
             ref={refResult}
@@ -120,7 +120,7 @@ const SilderImage = ({
       <ul className="react-slider__ul">
         {data.map((item, idx) => (
           <li key={idx} className={idx === index ? 'active' : ''} onClick={() => setIndex(idx)}>
-            <img src={item.image} alt="" />
+            <img src={item.image} alt={item.text} />
           </li>
         ))}
       </ul>
@@ -128,7 +128,7 @@ const SilderImage = ({
   )
 }
 
-SilderImage.propTypes = {
+SliderImage.propTypes = {
   /** data */
   data: PropTypes.array.isRequired,
   /** left | right */
@@ -139,10 +139,10 @@ SilderImage.propTypes = {
   width: PropTypes.string,
 }
 
-SilderImage.defaultProps = {
+SliderImage.defaultProps = {
   direction: 'right',
   showDescription: true,
   width: 'auto',
 }
 
-export default SilderImage
+export default SliderImage

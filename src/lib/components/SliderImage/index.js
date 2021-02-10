@@ -1,1 +1,1 @@
-export { default } from './SilderImage'
+export { default } from './SliderImage'
