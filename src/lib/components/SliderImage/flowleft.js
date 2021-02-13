@@ -6,13 +6,13 @@ const Slider1 = Styled.ul`
   flex-flow: row wrap;
   margin: 20px 0 0;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-direction: column !important;
   float: left;
 `
 
 const Slider2 = Styled.div`
-  width: 300px;
   float: right;
+  width: 80%;
 `
 
 const FlowLeft = forwardRef((props, ref) => {
