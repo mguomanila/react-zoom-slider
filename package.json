@@ -1,10 +1,10 @@
 {
-  "name": "react-zoom-slider",
-  "version": "0.1.0",
+  "name": "@phaedrusdesign/react-zoom-slider",
+  "version": "0.1.2",
   "description": "An ReactJS implementation for zoom & slider image by JSLancer team",
-  "author": "Tony Nguyen",
+  "author": "Tony Nguyen, Marlon P.",
   "license": "MIT",
-  "homepage": "https://github.com/JSLancerTeam/react-zoom-slider",
+  "homepage": "https://github.com/mguomanila/react-zoom-slider",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -32,7 +32,8 @@
     "rolluph": "rollup --help"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "styled-components": "^5.2.1"
   },
   "peerDependencies": {
     "react": "^16.12.0",

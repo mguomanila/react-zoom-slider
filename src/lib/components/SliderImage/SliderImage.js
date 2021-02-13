@@ -2,6 +2,8 @@ import React, {
   useState, useCallback, useRef, useEffect,
 } from 'react'
 import PropTypes from 'prop-types'
+import FlowDown from './flowdown'
+import FlowLeft from './flowleft'
 
 /* css */
 import './styles.css'
@@ -13,7 +15,7 @@ let imageCurrent = null
 let resultCurrent = null
 
 const SliderImage = ({
-  data, width, showDescription, direction,
+  data, width, showDescription, direction, flow,
 }) => {
   const [index, setIndex] = useState(0)
   const selectedImage = data[index]
@@ -91,39 +93,34 @@ const SliderImage = ({
   const onNextSlider = useCallback(() => {
     setIndex(prev => (prev + 1) % data.length)
   }, [data])
+  
+  const isFlowDown = flow === 'down'
 
   return (
     <div className="react-slider" style={{ width: width || 'auto' }}>
-      <div className="react-slider__container">
-        <div className="react-slider__areaZoom">
-          <div className="react-slider__lens" ref={refLens} />
-          <div className="react-slider__picture">
-            <img src={selectedImage.image} alt={selectedImage.text} ref={refImage} />
-          </div>
-          <div
-            ref={refResult}
-            className="react-slider__imgZoom"
-            style={{
-              backgroundImage: `url(${selectedImage.image})`,
-              left: `${direction === 'left' && '-107%'}`,
-            }}
-          />
-        </div>
-        <button type="button" className="react-slider__btnPrev" onClick={onPrevSlider} />
-        <button type="button" className="react-slider__btnNext" onClick={onNextSlider} />
-        {showDescription && (
-          <div className="react-slider__description">
-            {selectedImage.text}
-          </div>
-        )}
-      </div>
-      <ul className="react-slider__ul">
-        {data.map((item, idx) => (
-          <li key={idx} className={idx === index ? 'active' : ''} onClick={() => setIndex(idx)}>
-            <img src={item.image} alt={item.text} />
-          </li>
-        ))}
-      </ul>
+    {isFlowDown &&
+      <FlowDown 
+        ref={{refLens, refImage, refResult}}
+        data={data}
+        selectedImage={selectedImage}
+        showDescription={showDescription}
+        direction={direction}
+        onPrevSlider={onPrevSlider}
+        onNextSlider={onNextSlider}
+        index={index}
+        setIndex={setIndex}
+      /> ||
+      <FlowLeft
+        ref={{refLens, refImage, refResult}}
+        data={data}
+        selectedImage={selectedImage}
+        showDescription={showDescription}
+        direction={direction}
+        onPrevSlider={onPrevSlider}
+        onNextSlider={onNextSlider}
+        index={index}
+        setIndex={setIndex}
+      />}
     </div>
   )
 }
@@ -133,6 +130,8 @@ SliderImage.propTypes = {
   data: PropTypes.array.isRequired,
   /** left | right */
   direction: PropTypes.string,
+  /** down or left */
+  flow: Proptypes.string,
   /** show description of image */
   showDescription: PropTypes.bool,
   /** set size slider image */
@@ -140,6 +139,7 @@ SliderImage.propTypes = {
 }
 
 SliderImage.defaultProps = {
+  flow: 'down',
   direction: 'right',
   showDescription: true,
   width: 'auto',

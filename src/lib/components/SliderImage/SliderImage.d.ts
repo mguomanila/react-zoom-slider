@@ -6,6 +6,7 @@ export interface SliderImage {
 }
 
 export type SliderDirection = 'left' | 'right';
+export type SliderFlow = 'left' | 'down'
 
 export interface SliderImageProps {
 	/**
@@ -16,6 +17,7 @@ export interface SliderImageProps {
 	 * Left, Center, or Right
 	 */
 	direction?: SliderDirection;
+  flow?: SliderFlow
 	/**
 	 * Whether to display a description image
 	 */

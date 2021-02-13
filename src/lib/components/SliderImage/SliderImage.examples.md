@@ -3,7 +3,7 @@ Timeline examples:
 ###### Slider Image
 ```js
 import {useState, useEffect} from 'react';
-import SliderImage from 'react-zoom-slider';
+import SliderImage from '@phaedrusdesign/react-zoom-slider';
 
 const data = [{
   image: 'https://cdn.tgdd.vn/Products/Images/42/209800/oppo-reno2-f-xanh-1-org.jpg',
@@ -39,7 +39,7 @@ function Test(props){
   }, [])
   
   return (
-    <SliderImage data={myData} width="500px" showDescription={true} direction="right" />
+    <SliderImage data={myData} width="500px" showDescription={true} direction="right" flow="left" />
   )
 }
 
